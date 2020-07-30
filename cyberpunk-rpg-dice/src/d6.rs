@@ -42,6 +42,21 @@ pub fn explode_count(dice: &Vec<u8>) -> u8 {
     explode_count
 }
 
+fn is_glitch(die: u8) -> bool {
+    validate_d6(die);
+    die == 1
+}
+
+pub fn rolled_glitch(dice: &Vec<u8>) -> bool {
+    let mut glitch_count = 0;
+    for d in dice {
+        if is_glitch(*d) {
+            glitch_count += 1;
+        }
+    }
+    glitch_count as f32 >= (dice.len() as f32 / 2f32).ceil()
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -50,22 +65,22 @@ mod tests {
         use super::*;
 
         #[test]
-        fn miss_1() {
+        fn hit_1() {
             assert!(!is_hit(1));
         }
         
         #[test]
-        fn miss_2() {
+        fn hit_2() {
             assert!(!is_hit(2));
         }
 
         #[test]
-        fn miss_3() {
+        fn hit_3() {
             assert!(!is_hit(3));
         }
         
         #[test]
-        fn miss_4() {
+        fn hit_4() {
             assert!(!is_hit(4));
         }
         
@@ -98,27 +113,27 @@ mod tests {
         use super::*;
 
         #[test]
-        fn pass_1() {
+        fn expode_1() {
             assert!(!is_explode(1));
         }
         
         #[test]
-        fn pass_2() {
+        fn expode_2() {
             assert!(!is_explode(2));
         }
 
         #[test]
-        fn pass_3() {
+        fn expode_3() {
             assert!(!is_explode(3));
         }
         
         #[test]
-        fn pass_4() {
+        fn expode_4() {
             assert!(!is_explode(4));
         }
         
         #[test]
-        fn pass_5() {
+        fn expode_5() {
             assert!(!is_explode(5));
         }
         
@@ -139,6 +154,69 @@ mod tests {
         #[test]
         fn some() {
             assert_eq!(explode_count(&vec![1, 2, 3, 4, 5, 6]), 1);
+        }
+    }
+
+    mod glitch_tests {
+        use super::*;
+
+        #[test]
+        fn glitch_1() {
+            assert!(is_glitch(1));
+        }
+        
+        #[test]
+        fn glitch_2() {
+            assert!(!is_glitch(2));
+        }
+
+        #[test]
+        fn glitch_3() {
+            assert!(!is_glitch(3));
+        }
+        
+        #[test]
+        fn glitch_4() {
+            assert!(!is_glitch(4));
+        }
+        
+        #[test]
+        fn glitch_5() {
+            assert!(!is_glitch(5));
+        }
+        
+        #[test]
+        fn glitch_6() {
+            assert!(!is_glitch(6));
+        }
+    }
+
+    mod rolled_glitch_tests {
+        use super::*;
+
+        #[test]
+        fn empty() {
+            assert_eq!(rolled_glitch(&vec![]), true);
+        }
+
+        #[test]
+        fn zero_for_three() {
+            assert_eq!(rolled_glitch(&vec![2, 4, 6]), false);
+        }
+
+        #[test]
+        fn one_for_three() {
+            assert_eq!(rolled_glitch(&vec![1, 4, 6]), false);
+        }
+
+        #[test]
+        fn two_for_three() {
+            assert_eq!(rolled_glitch(&vec![1, 1, 4]), true);
+        }
+
+        #[test]
+        fn three_for_three() {
+            assert_eq!(rolled_glitch(&vec![1, 1, 1]), true);
         }
     }
 }
