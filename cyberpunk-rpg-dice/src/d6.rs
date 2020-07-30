@@ -66,32 +66,32 @@ mod tests {
 
         #[test]
         fn hit_1() {
-            assert!(!is_hit(1));
+            assert_eq!(is_hit(1), false);
         }
         
         #[test]
         fn hit_2() {
-            assert!(!is_hit(2));
+            assert_eq!(is_hit(2), false);
         }
 
         #[test]
         fn hit_3() {
-            assert!(!is_hit(3));
+            assert_eq!(is_hit(3), false);
         }
         
         #[test]
         fn hit_4() {
-            assert!(!is_hit(4));
+            assert_eq!(is_hit(4), false);
         }
         
         #[test]
         fn hit_5() {
-            assert!(is_hit(5));
+            assert_eq!(is_hit(5), true);
         }
         
         #[test]
         fn hit_6() {
-            assert!(is_hit(6));
+            assert_eq!(is_hit(6), true);
         }
     }
 
@@ -114,32 +114,32 @@ mod tests {
 
         #[test]
         fn expode_1() {
-            assert!(!is_explode(1));
+            assert_eq!(is_explode(1), false);
         }
         
         #[test]
         fn expode_2() {
-            assert!(!is_explode(2));
+            assert_eq!(is_explode(2), false);
         }
 
         #[test]
         fn expode_3() {
-            assert!(!is_explode(3));
+            assert_eq!(is_explode(3), false);
         }
         
         #[test]
         fn expode_4() {
-            assert!(!is_explode(4));
+            assert_eq!(is_explode(4), false);
         }
         
         #[test]
         fn expode_5() {
-            assert!(!is_explode(5));
+            assert_eq!(is_explode(5), false);
         }
         
         #[test]
         fn expode_6() {
-            assert!(is_explode(6));
+            assert_eq!(is_explode(6), true);
         }
     }
 
@@ -162,32 +162,32 @@ mod tests {
 
         #[test]
         fn glitch_1() {
-            assert!(is_glitch(1));
+            assert_eq!(is_glitch(1), true);
         }
         
         #[test]
         fn glitch_2() {
-            assert!(!is_glitch(2));
+            assert_eq!(is_glitch(2), false);
         }
 
         #[test]
         fn glitch_3() {
-            assert!(!is_glitch(3));
+            assert_eq!(is_glitch(3), false);
         }
         
         #[test]
         fn glitch_4() {
-            assert!(!is_glitch(4));
+            assert_eq!(is_glitch(4), false);
         }
         
         #[test]
         fn glitch_5() {
-            assert!(!is_glitch(5));
+            assert_eq!(is_glitch(5), false);
         }
         
         #[test]
         fn glitch_6() {
-            assert!(!is_glitch(6));
+            assert_eq!(is_glitch(6), false);
         }
     }
 
