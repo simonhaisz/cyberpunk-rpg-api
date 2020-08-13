@@ -2,7 +2,7 @@ use crate::d6::{roll_d6, hit_count, explode_count, rolled_glitch};
 
 pub struct RollResult {
 	hits: u8,
-	glitch: bool,
+    glitch: bool,
 }
 
 impl RollResult {
